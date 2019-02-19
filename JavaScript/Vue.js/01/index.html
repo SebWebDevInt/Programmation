@@ -9,73 +9,94 @@
 </head>
 <body>
     <div id="app" class="container">
-        <h1>Présentation de Vue.JS</h1>
-        <p>
-            Vue.JS est un framework javascript de type « front-end » (s’exécutant côté client), permettant le rendu de pages web.
-        </p>
-        <hr/>
-
-        <h2>Les bases</h2>
-        <h3>Utilisation des variables et lien entre vue et modèle</h3>
-        <p>
-            Lier des variables de VueJS à des éléments du DOM ou des attributs d'éléments.<br />
-            <u>Ex</u> :
-            <code>
-                &lt;input type="text" v-model="lien_texte" /&gt;<br />
-                &lt;a :href="lien_url + '/complement/url'" :title="lien_texte"&gt;{ lien_texte }&lt;/a&gt;
-            </code>
-        </p>
-
-        <input type="text" v-model="lien_texte" /><br />
-        <a :href="lien_url + '/tutos'" :title="lien_texte">{{ lien_texte }}</a>
-
-        <hr />
-
-        <p>Une variable est définie à l'aide d'une case à cocher et cette variable permet de définir la classe affecter à la boite d'alerte.</p>
-        <input type="checkbox" v-model="succes" />
-        <div class="alert" :class="succes ? 'alert-success' : 'alert-danger'">
-            Message d'alerte vert ou rouge selon un booléen.
-        </div>
-
-        <hr />
-
-        <h3>:true-value et :false-value</h3>
-        <p>La même chose pour illustrer le fonctionnement de :true-value et :false-value.</p>
-        <input type="checkbox" v-model="cls" :true-value="'alert-info'" :false-value="'alert-warning'" /> 
-        <div class="alert" :class="cls">
-            La classe change automatiquement selon que la case soit cochée ou non !
-        </div>
-
-        <hr />
-
-        <h3>v-if et v-show</h3>
-        <p>
-            Différence entre <strong>v-if</strong> et <strong>v-show</strong>. Le premier n'affiche pas du tout l'élément dans le DOM. Le deuxième le cache.<br />
-            <u>Ex</u> : <code>&lt;div v-if="variable"&gt;&lt;/div&gt;</code> OU <code>&lt;div v-show="variable"&gt;&lt;/div&gt;</code>
-        </p>
-        <div class="alert alert-info" v-if="!affichage">
-            Utilisation de v-if pour afficher ou non un élément.
-        </div>
-        <div class="alert alert-warning" v-show="affichage">
-            Utilisation de v-show pour cacher ou non un élément.
-        </div>
-        <button class="btn btn-default" v-on:click="toogleAffichage">Toogle</button>
-
-        <hr />
-
-        <h3>v-for</h3>
-        <p>
-            On répète un élément du DOM pour chaque valeur d'un tableau.<br />
-            <u>Ex</u> : <code>&lt;li v-for="personne in personnes"&gt;{ personne }&lt;/li&gt;</code>
-        </p>
-        <div>
-            <ul>
-                <li v-for="personne in personnes">{{ personne }}</li>
-            </ul>
+        <div class="row">
+            <div class="col-sm-10">
+                <h1>Présentation de Vue.JS</h1>
+                <p>
+                    Vue.JS est un framework javascript de type « front-end » (s’exécutant côté client), permettant le rendu de pages web.
+                </p>
+                <hr/>
+    
+                <h2>Les bases</h2>
+                <h3>Utilisation des variables et lien entre vue et modèle</h3>
+                <p>
+                    Lier des variables de VueJS à des éléments du DOM ou des attributs d'éléments.<br />
+                    <u>Ex</u> :
+                    <code>
+                        &lt;input type="text" v-model="lien_texte" /&gt;<br />
+                        &lt;a :href="lien_url + '/complement/url'" :title="lien_texte"&gt;{ lien_texte }&lt;/a&gt;
+                    </code>
+                </p>
+    
+                <input type="text" v-model="lien_texte" /><br />
+                <a :href="lien_url + '/tutos'" :title="lien_texte">{{ lien_texte }}</a>
+    
+                <hr />
+    
+                <p>Une variable est définie à l'aide d'une case à cocher et cette variable permet de définir la classe affecter à la boite d'alerte.</p>
+                <input type="checkbox" v-model="succes" />
+                <div class="alert" :class="succes ? 'alert-success' : 'alert-danger'">
+                    Message d'alerte vert ou rouge selon un booléen.
+                </div>
+    
+                <hr />
+    
+                <h3>:true-value et :false-value</h3>
+                <p>La même chose pour illustrer le fonctionnement de :true-value et :false-value.</p>
+                <input type="checkbox" v-model="cls" :true-value="'alert-info'" :false-value="'alert-warning'" /> 
+                <div class="alert" :class="cls">
+                    La classe change automatiquement selon que la case soit cochée ou non !
+                </div>
+    
+                <hr />
+    
+                <h3>v-if et v-show</h3>
+                <p>
+                    Différence entre <strong>v-if</strong> et <strong>v-show</strong>. Le premier n'affiche pas du tout l'élément dans le DOM. Le deuxième le cache.<br />
+                    <u>Ex</u> : <code>&lt;div v-if="variable"&gt;&lt;/div&gt;</code> OU <code>&lt;div v-show="variable"&gt;&lt;/div&gt;</code>
+                </p>
+                <div class="alert alert-info" v-if="!affichage">
+                    Utilisation de v-if pour afficher ou non un élément.
+                </div>
+                <div class="alert alert-warning" v-show="affichage">
+                    Utilisation de v-show pour cacher ou non un élément.
+                </div>
+                <button class="btn btn-default" v-on:click="toogleAffichage">Toogle</button>
+    
+                <hr />
+    
+                <h3>v-for</h3>
+                <p>
+                    On répète un élément du DOM pour chaque valeur d'un tableau.<br />
+                    <u>Ex</u> : <code>&lt;li v-for="personne in personnes"&gt;{ personne }&lt;/li&gt;</code>
+                </p>
+                <div>
+                    <ul>
+                        <li v-for="personne in personnes">{{ personne }}</li>
+                    </ul>
+                </div>
+    
+                <hr />
+    
+                <h3>Attributs computed</h3>
+                <p>
+                    Prénom : {{ prenom }}<br />
+                    Nom : {{ nom }}<br />
+                    Nom complet : <input type="text" v-model="nom_complet" />
+                </p>
+    
+                <hr />
+                
+                <h2>Mise en place d'un timer</h2>
+                <div class="alert alert-info">
+                    <strong>{{ secondes }}</strong>
+                </div>
+            </div>
+            <div class="col-sm-2" v-html="console"></div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
-    <script src="./js/app.js"></script>rainbow-custom.min
+    <script src="./js/app.js"></script>
 </body>
 </html>

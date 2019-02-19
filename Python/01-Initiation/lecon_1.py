@@ -46,3 +46,8 @@ nom2 = nom
 nom3 = 'Patrick'
 print(id(nom), id(nom2), id(nom3))
 
+# Fonctions sur les chaines
+nom = 'seb neiter'
+print(nom.title(), nom.center(30, '-'))
+print(dir(nom))
+print(nom.__len__(), 'OU', len(nom))

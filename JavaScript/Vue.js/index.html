@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Vue.js</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1 class="display-4">Vue.js</h1>
+			<p class="lead">
+				Un petit mémo pour utiliser Vue.js.
+			</p>
+		</div>
+
+		<h2>Les bases</h2>
+		<p>
+			<code>&lt;div&gt;{{ var_texte }}&lt;/div&gt;</code> : Affiche une variable dans une page HTML.<br />
+			<code>&lt;div v-bind:title="var_texte"&gt;</code> : v-bind:attribut permet d'affecter une variable dans un attribut d'un élément HTML.<br />
+			<code>&lt;div v-if="var_booleen"&gt;</code> : v-if permet d'afficher un élément ou non.<br />
+			<code>&lt;div v-show="var_booleen"&gt;</code> : v-show permet de cacher un élément ou non.<br />
+			<code>&lt;ul&gt;&lt;li v-for="val in tableau"&gt;{{ val }}&lt;/li&gt;&lt;/ul&gt;</code> : v-for permet de boucler sur les éléments d'un tableau.<br />
+			<code>&lt;button v-on:click="maFonction"&gt;Appuyer&lt;/button&gt;</code> : v-on:event permet de lier une fonction à un évènement.<br />
+			<code>&lt;input v-model="var_texte" /&gt;</code> : v-model permet de lier une variable à un élément de formulaire.
+		</p>
+		
+		<hr/>
+		
+	</div>
+</body>
+</html>
+
+
+
+
+
