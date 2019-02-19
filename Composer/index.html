@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Composer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1 class="display-4">Composer</h1>
+			<p class="lead">
+				Composer est un gestionnaire de dépendances écrit en PHP.
+			</p>
+		</div>
+		
+		<h2>Installer et configurer Composer</h2>
+		<h4>Installation</h4>
+		<p>
+			Suivre les instructions sur le site de Composer : <code>https://getcomposer.org/</code><br />
+			S'assurer que le binaire est accessible depuis la variable PATH.
+		</p>
+
+		<hr />
+
+		<h2>Utilisation de Composer</h2>
+		<h4>Gérer les dépendances</h4>
+		<p>
+			Toutes les dépendances nécessaires au projet sont renseignées dans un fichier <code>composer.json</code>. Les dépendances installées sont elles spécifiées dans le fichier <code>composer.lock</code>. Si ce fichier existe lors de l'installation des dépendances l'installateur se basera sur les informations de ce fichier. Sinon il mettre les dépendances en dernière version possible selon les renseignements présents dans le fichier <code>composer.json</code>.<br />
+			<code>composer install</code> : Télécharge les dépendances du projet dans le dossier vendor (par défaut) et cré le fichier <code>composer.lock</code>.<br />
+			<code>composer update</code> : Met à jour l'ensemble des dépendances.<br />
+			<code>composer update [dependance]</code> : Met à jour la dépendance spécifiée.<br />
+			<code>composer require [dependance]</code> : Ajoute la dépendance au projet et la télécharge.
+		</p>
+
+		<hr />
+
+		<h2>Autoloading</h2>
+		<p>
+			Pour les librairies qui spécifies des informations d'auto chargement Composer génère un fichier <code>vendor/autoload.php</code>. Il suffit d'inclure alors ce fichier au projet php de cette manière :<br />
+			<code>require __DIR__ . '/vendor/autoload.php';</code>
+		</p>
+		<p>
+			Il est possible d'ajouter du code pour charger automatiquement des librairies à partir du fichier <code>composer.json</code>.<br />
+			<code>
+				{
+					"autoload": {
+						"psr-4": {"MonNamespace\\": "mon_dossier/"}
+					}
+				}
+			</code>
+			<br />
+			Dans le cas présent Composer chargera automatiquement le namespace MonNamespace qui pointera sur le dossier mon_dossier.<br />
+			Il faudra juste regénérer le fichier <code>vendor/autoload.php</code> à l'aide de la commande suivante pour que la modification soit prise en compte :<br />
+			<code>composer dump-autoload</code>
+		</p>
+	</div>
+</body>
+</html>
+
+
+
+
+

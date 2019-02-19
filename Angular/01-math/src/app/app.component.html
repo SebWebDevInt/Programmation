@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Matcalcul</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form (ngSubmit)="compute()" #f="ngForm">
+                <div class="form-group">
+                    <label class="control-label">Nombre 1</label>
+                    <input type="number" required class="form-control" name="nombre1" [(ngModel)]="nombre1" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nombre 2</label>
+                    <input type="number" required class="form-control" name="nombre2" [(ngModel)]="nombre2" />
+                </div>
+                <div class="form-group">
+                    <button [disabled]="f['invalid']" class="btn btn-block btn-primary">Calcul</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8" *ngIf="somme">
+            <ul>
+                <li>La somme de {{ nombre1 }} et {{ nombre2 }} est {{ somme }}.</li>
+                <li>La multiplication de {{ nombre1 }} et {{ nombre2 }} est {{ multiplication }}.</li>
+                <li>La soustraction de {{ nombre1 }} et {{ nombre2 }} est {{ soustraction }}.</li>
+            </ul>
+            <p class="alert alert-warning">
+                <strong>Ceci sont des affichages pour tester des fonctionnalités de Angular :</strong><br />
+                Le formulaire est-il valide ? <b>{{ f.valid }}</b><br />
+                Quels sont les données du formulaire ? <b>{{ f.value | json }}</b>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <app-womenizer></app-womenizer>
+</div>

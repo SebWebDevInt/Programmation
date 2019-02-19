@@ -1,0 +1,9 @@
+personnes:
+  seb:
+    nom: Seb
+    age: 38
+    beau_gosse: true
+  david:
+    nom: David
+    age: 32
+    beau_gosse: false
