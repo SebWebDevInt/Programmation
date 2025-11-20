@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>JAVASCRIPT - Angular initiation</title>
+		<style type="text/css">
+			p { font-size: 12px; }
+			input { max-width: 70px }
+			li { margin-bottom: 14px; }
+			.expander { border: 1px solid black; width: 250px; }
+			.expander > .title { background-color: black; color: white; padding: .1em .3em; cursor: pointer; }
+			.expander > .body { padding: .1em .3em; }
+		</style>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script>
+			var myApp = angular.module('myApp',[]);
+			
+			myApp.controller("exemple_1", function($scope){
+				$scope.age = 0;
+				$scope.majeurOrMineurText = function(){
+					return ($scope.age >= 18) ? "majeur" : "mineur";    
+				};
+			});
+			
+			myApp.controller("exemple_2", function($scope) {
+				$scope.showContent = true;    
+			});
+			
+			myApp.controller("exemple_3", function($scope) {
+				$scope.name = "Sébastien"
+			});
+			
+			myApp.controller("exemple_4", function($scope) {
+				$scope.articles = [{"name": "Téléphone sans-fil", "quantity": 1, "price": "29.99"}, {"name": "Chargeur iPhone5", "quantity": 1, "price": "29.99"}];
+				$scope.total = function(){
+					var total = 0;
+					for(var i = 0; i < $scope.articles.length; i++){
+						total += $scope.articles[i].price * $scope.articles[i].quantity;
+					}
+					return total;
+				};
+				function calculateDiscount(newValue, oldValue, scope) {
+					$scope.discount = (newValue >= 100) ? newValue * 0.10 : 0;
+				};
+				
+				$scope.finalTotal = function(){
+					return $scope.total() - $scope.discount;   
+				};
+				
+				$scope.$watch($scope.total, calculateDiscount);
+			});
+			
+			myApp.controller("exemple_5", function($scope) {
+				$scope.title = "Titre";
+				$scope.text = "Contenu";
+			});
+			
+			myApp.directive("expander", function() {
+				return {
+					restrict: 'EA',
+					replace: true,
+					transclude: true,
+					scope: {title: '=expanderTitle'},
+					template: '<div>' +
+					'<div class="title" ng-click="toggle()">{{title}}</div>' +
+					'<div class="body" ng-show="showMe" ng-transclude></div>' +
+					'</div>',
+					link: function(scope, element, attrs) {
+						scope.showMe = false;
+						scope.toggle = function toggle() {
+							scope.showMe = !scope.showMe;
+						};
+					}
+				};
+			});
+			
+			myApp.filter('reverse', function() {
+				return function(input, uppercase) {
+					input = input || '';
+					var out = "";
+					for (var i = 0; i < input.length; i++) {
+					out = input.charAt(i) + out;
+					}
+					// conditional based on optional argument
+					if (uppercase) {
+						out = out.toUpperCase();
+					}
+					return out;
+				};
+			});
+		</script>
+	</head>
+	<body ng-app="myApp">
+		<div ng-controller="exemple_1">
+			<input ng-model="age"/>
+			<span>Vous êtes <b ng-bind="majeurOrMineurText()"></b></span>
+			<br />
+			<span>{{'2012-04-01' | date: 'dd/MM/yyyy'}}</span>
+		</div>
+		
+		<hr />
+		
+		<div ng-controller="exemple_2">
+			<label>Afficher le paragraphe</label>
+			<input type="checkbox" ng-model="showContent"/>
+			<p ng-show="showContent">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+		
+		<hr />
+		
+		<div ng-controller="exemple_3">
+			Bonjour {{name|reverse:false}} !
+		</div>
+		
+		<hr />
+		
+		<div ng-controller="exemple_4">
+			<ul>
+				<li ng-repeat="article in articles">
+					<label>{{article.name}}:</label>
+					<input ng-model="article.price" />
+					<input type="number" ng-model="article.quantity" />                
+				</li>
+			</ul>
+			<div>
+				<label>Total facture: </label><span>{{total() | currency: "€":2}}</span>            
+			</div>
+			<div>
+				 <label>Réduction: </label><span>{{discount | currency: "€":2}}</span>
+			</div>
+			<div>
+				<label>Somme à payer: </label><span>{{finalTotal() | currency: "€":2}}</span>        
+			</div>
+		</div>
+		
+		<hr />
+		
+		<div ng-controller="exemple_5">
+			<expander class="expander" expander-title="title">
+				{{text}}
+			</expander>
+		</div>
+		
+		<p>https://openclassrooms.com/courses/developpez-vos-applications-web-avec-angularjs/les-directives-3</p>
+	</body>
+</html>

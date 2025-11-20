@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>JAVASCRIPT - Les évènements</title>
+</head>
+<body>
+	<h1>Création d'un évènement</h1>
+	<input id="runEvent" type="button" value="Lancer Evenement"><br>
+	<input id="eventDestination" type="button" value="Destinataire evenement">
+	
+	<hr />
+	
+	<h1>Notion des phases de capture et bouillonnement</h1>
+	<div id="capt1">
+		<span id="capt2">Cliquez-moi pour la phase de capture.</span>
+	</div>
+	<div id="boul1">
+		<span id="boul2">Cliquez-moi pour la phase de bouillonnement.</span>
+	</div>
+</body>
+<script>
+	// Création événement
+	var monEvenement = new CustomEvent(
+		"monEvenement",
+		{
+			detail: {
+				message: "Hello World!",
+				time: new Date()
+			},
+			bubbles: true,
+			cancelable: true
+		}
+	);
+
+	// Abonnement du bouton "Destinaitaire événement" à l'événement
+	var eventDestination = document.getElementById("eventDestination");
+	eventDestination.addEventListener("monEvenement", function(event) {
+		console.log("Reception de l'evenement");
+		console.log(event.detail.message);
+	});
+	 
+	// Lancement de l'événement sur clic du bouton "Lancer Evénement"
+	var runEvent = document.getElementById("runEvent");
+	runEvent.addEventListener("click", function() {
+		console.log("Lancement de l'evenement");
+		document.getElementById("eventDestination").dispatchEvent(monEvenement);
+	});
+	
+	
+	
+	// Notion des phases de capture et bouillonnement
+	var capt1 = document.getElementById('capt1'),
+		capt2 = document.getElementById('capt2'),
+		boul1 = document.getElementById('boul1'),
+		boul2 = document.getElementById('boul2');
+  
+	capt1.addEventListener('click', function() {
+		console.log("L'événement du div vient de se déclencher.");
+	}, true);
+  
+	capt2.addEventListener('click', function() {
+		console.log("L'événement du span vient de se déclencher.");
+	}, true);
+  
+	boul1.addEventListener('click', function() {
+		console.log("L'événement du div vient de se déclencher.");
+	}, false);
+  
+	boul2.addEventListener('click', function() {
+		console.log("L'événement du span vient de se déclencher.");
+	}, false);
+</script>
+</html>

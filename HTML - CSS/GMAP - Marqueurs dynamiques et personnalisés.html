@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>Google Map - Marqueurs dynamiques et personnalisés</title>
+		<style type="text/css">
+			#gmap {
+				width: 800px; height: 600px;
+			}
+			.gmap_marqueur {
+				box-sizing: border-box;
+				background-color: #056887; border: 5px solid #ffffff; border-radius: 50%; color: #ffffff; height: 70px; width: 70px;
+				font-size: 20px; font-weight: bold; text-align: center; padding-top: 15px;
+				&.princ {
+					position: relative; background-color: #ffffff; border: 5px solid #056887; color: #056887;
+				}
+			}
+			.gmap_marqueur_euro {
+				font-size: 14px; font-weight: normal; vertical-align: super;
+			}
+			.jsc_gmap_position { display: none; }
+			.jsc_gmap_marqueur { display: none; }
+		</style>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
+		<script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+		<script>
+			function initMap() {
+				if ($("#gmap").length == 1) {
+					var map;
+					var styles = [{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#9cb801"}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#9cb801"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}];
+					var myLatLng = {lat: parseFloat($(".jsc_gmap_position").attr("data-lat")), lng: parseFloat($(".jsc_gmap_position").attr("data-lng"))};
+					map = new google.maps.Map(document.getElementById('gmap'), {
+						center: myLatLng,
+						zoom: 12
+					});
+
+					var marker = false;
+					if ($(".jsc_gmap_position").attr("data-prix")) {
+						marker = new MarkerWithLabel({
+							map: map,
+							position: myLatLng,
+							draggable: false,
+							raiseOnDrag: false,
+							labelContent: $(".jsc_gmap_position").attr("data-prix") + "<span class=\"gmap_marqueur_euro\">€</span>",
+							labelAnchor: new google.maps.Point(35, 42),
+							labelClass: "gmap_marqueur princ",
+							labelInBackground: false,
+							icon: null
+						});
+					}
+					var i = 0;
+					$(".jsc_gmap_marqueur").each(function () {
+						myLatLng = {lat: parseFloat($(this).attr("data-lat")), lng: parseFloat($(this).attr("data-lng"))};
+						marker = new MarkerWithLabel({
+							map: map,
+							position: myLatLng,
+							draggable: false,
+							raiseOnDrag: false,
+							labelContent: $(this).attr("data-prix") + "<span class=\"gmap_marqueur_euro\">€</span>",
+							labelAnchor: new google.maps.Point(35, 42),
+							labelClass: "gmap_marqueur",
+							labelInBackground: false,
+							icon: null
+						});
+						google.maps.event.addListener(marker, 'click', (function(marker, i) {
+							return function() {
+								window.location.href = $(".jsc_gmap_marqueur").eq(i).attr("data-url");
+							}
+						})(marker, i));
+						i++;
+					});
+					
+					map.setOptions({styles: styles});
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<span class="jsc_gmap_position" data-url="http://www.aja.fr" data-prix="300" data-lng="-1.12338" data-lat="44.6987"></span>
+		<span class="jsc_gmap_marqueur" data-url="http://www.aja.fr" data-prix="300" data-lng="-1.12338" data-lat="44.6987"></span>
+		<span class="jsc_gmap_marqueur" data-url="http://www.aja.fr" data-prix="285" data-lng="-1.13986" data-lat="44.7631"></span>
+		<span class="jsc_gmap_marqueur" data-url="http://www.aja.fr" data-prix="190" data-lng="-1.0863" data-lat="44.7275"></span>
+		<div id="gmap"></div>
+		<script>
+			initMap();
+		</script>
+	</body>
+</html>

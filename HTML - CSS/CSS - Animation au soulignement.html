@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>CSS - Animation souligné</title>
+		<style>
+			* {
+				margin:0;padding:0;border:0 none;position: relative; outline: none;
+			}
+			h2 > a {
+				text-decoration: none;
+				color: rgba(0,0,0,.4);
+				z-index: 1;
+			}
+			h2 > a:before {
+				content: "";
+				position: absolute;
+				width: 100%;
+				height: 3px;
+				bottom: 0;
+				left: 0;
+				background: #ff0000;
+				visibility: hidden;
+				border-radius: 5px;
+				transform: scaleX(0);
+				transition: .25s linear;
+			}
+			h2 > a:hover:before {
+				visibility: visible;
+				transform: scaleX(1);
+			}
+		</style>
+	</head>
+	<body>
+		<h2>
+			<a href=''>:hover, please</a>
+		</h2>
+	</body>
+</html>

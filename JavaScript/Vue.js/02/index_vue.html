@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Beloinche</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+	<script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+	<div id="app_vue">
+		<input type="hidden" name="hidden_uuid" id="jsi_uuid" value="" />
+		<input type="hidden" name="hidden_pseudo" id="jsi_pseudo" value="" />
+		<input type="hidden" name="hidden_salon" id="jsi_salon" value="" />
+		<input type="hidden" name="hidden_id_joueur" id="jsi_id_joueur" value="" />
+
+		<div id="jsi_menu_ouvrir" v-bind:class="titre">
+			<hr />
+			<hr />
+			<hr />
+		</div>
+		<nav id="menu">
+			<div class="menu_contenu">
+				<div id="btn_menu_regles" class="menu_entree" data-ecran="ecran_regles"><span class="lng-auto" data-html="regles_jeu">Règles du jeu</span></div>
+			</div>
+		</nav>
+		
+		<div id="chat" data-salon="gof-accueil">
+			<div class="chat_flex">
+				<span class="lng-auto chat_message" data-html="chat_bonjour">Bonjour</span>
+				<span class="lng-auto chat_message" data-html="chat_bienjoue">Bien joué</span>
+				<span class="lng-auto chat_message" data-html="chat_maljoue">Mal joué</span>
+				<span class="lng-auto chat_message" data-html="chat_chance">Quelle chance</span>
+				<span class="lng-auto chat_message" data-html="chat_paschance">Pas de chance</span>
+				<span class="lng-auto chat_message" data-html="chat_merci">Merci</span>
+				<span class="lng-auto chat_message" data-html="chat_dommage">Dommage</span>
+			</div>
+		</div>
+
+
+
+
+
+		<div id="ecran_regles" class="popup" style="display: none;">
+			<div class="popup_conteneur">
+				<div class="popup_fermer"></div>
+				<div class="ecran_titre"><span class="lng-auto" data-html="regles_jeu">Règles du jeu</span></div>
+				<h2><span class="lng-auto" data-html="regles_but">But du jeu</span></h2>
+				<p><span class="lng-auto" data-html="regles_but_desc">Gagner !</span></p>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		<div id="ecran_connexion" class="ecran">
+			<div class="ecran_titre">Beloinche</div>
+			<div class="ecran_page">
+				<div id="ecran_connexion_1">
+					<div class="ico_appli"></div>
+				</div>
+				<div id="ecran_connexion_2">
+					<input type="text" name="pseudo" id="jsi_txt_pseudo" class="lng-auto" data-placeholder="choisir_pseudo" placeholder="Veuillez choisir un pseudo" maxlength="20" />
+				</div>
+				<div id="ecran_connexion_3" class="drapeaux">
+					<div class="drapeau fr active" data-lng="fr"></div>
+					<div class="drapeau en" data-lng="en"></div>
+					<div class="drapeau es" data-lng="es"></div>
+					<div class="drapeau in" data-lng="in"></div>
+				</div>
+				<div id="ecran_connexion_4">
+					<button id="jsi_btn_connexion"><span class="lng-auto" data-html="entrer">Entrer</span></button>
+				</div>
+				<div id="ecran_connexion_5">
+					<div id="jsi_connexion_message">&nbsp;</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div id="ecran_accueil" class="ecran" style="display: none;">
+			<div class="ecran_titre"><span class="lng-auto" data-html="accueil">ACCUEIL</span></div>
+			<div class="ecran_page">
+				<div class="ecran_accueil_bloc">
+					<div id="jsi_partie_solo" class="ecran_accueil_bouton">
+						<div class="ecran_accueil_icone"></div>
+						<div class="ecran_accueil_texte">
+							<div class="ecran_accueil_titre">Partie Solo</div>
+							<div class="ecran_accueil_sstitre">Jouez seul contre des robots</div>
+						</div>
+					</div>
+				</div>
+				<div class="ecran_accueil_bloc">
+					<div id="jsi_partie_en_ligne" class="ecran_accueil_bouton">
+						<div class="ecran_accueil_icone"></div>
+						<div class="ecran_accueil_texte">
+							<div class="ecran_accueil_titre">Partie en ligne</div>
+							<div class="ecran_accueil_sstitre">Jouez en ligne contre d'autres personnes</div>
+						</div>
+					</div>
+				</div>
+				<div class="ecran_accueil_bloc">
+					<div id="jsi_partie_privee" class="ecran_accueil_bouton">
+						<div class="ecran_accueil_icone"></div>
+						<div class="ecran_accueil_texte">
+							<div class="ecran_accueil_titre">Partie privée</div>
+							<div class="ecran_accueil_sstitre">Jouez en ligne avec des amis dans une partie privée</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div id="ecran_inscription" class="ecran" style="display: none;">
+			<div class="ecran_titre"><span class="lng-auto" data-html="liste_parties">TRADUCTION</span></div>
+			<div class="ecran_page">
+				<div class="dynamique">
+					
+				</div>
+				<div class="btn_conteneur">
+					<button id="jsi_btn_nouvelle_partie" class="btn_nouveau"><span class="lng-auto" data-html="creer_partie">TRADUCTION</span></button>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div id="ecran_creation" class="ecran" style="display: none;">
+			<div class="ecran_titre"><span class="lng-auto" data-html="nouvelle_partie">TRADUCTION</span></div>
+			<div class="ecran_page">
+				<div class="np_option np_option_vitesse">
+					<span class="btn_poussoir npo_vitesse_normale active"></span>
+					<span class="btn_poussoir npo_vitesse_rapide"></span>
+				</div>
+				<div class="np_option np_option_prive">
+					<span class="btn_poussoir npo_prive_btn"></span>
+					<br /><br />
+					<input type="text" id="npo_prive_mdp" class="lng-auto" data-placeholder="mot_passe" placeholder="" maxlength="10" />
+				</div>
+				<div class="btn_conteneur btn_conteneur_double">
+					<button id="jsi_nouvelle_partie_annuler" class="btn_annuler"><span class="lng-auto" data-html="annuler">TRADUCTION</span></button>
+					<button id="jsi_nouvelle_partie_lancer" class="btn_nouveau"><span class="lng-auto" data-html="creer">TRADUCTION</span></button>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div id="ecran_attente" class="ecran" style="display: none;">
+			<div class="ecran_titre"><span class="lng-auto" data-html="attente_joueurs">TRADUCTION</span></div>
+			<div class="ecran_page">
+				<div class="ecran_attente_flex">
+					<div>
+						<div class="joueur auto_j0"></div>
+					</div>
+					<div>
+						<div class="joueur auto_j1"></div>
+					</div>
+					<div>
+						<div class="joueur auto_j2"></div>
+					</div>
+					<div>
+						<div class="joueur auto_j3"></div>
+					</div>
+					<div>
+						<button id="jsi_quitter_partie" data-salon=""><span class="lng-auto" data-html="quitter">TRADUCTION</span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<div id="ecran_partie" class="ecran" style="display: none;">
+			<div id="jsi_chat_ouvrir" style="display: none;"></div>
+			<div class="ecran_partie_flex">
+				<div id="tapis">
+					<div class="tapis_centre">
+						<div class="cartes"></div>
+					</div>
+					<div id="jou_face" class="jou_autre">
+						<div class="auto_nom"></div>
+						<div class="auto_pts"></div>
+						<div class="cartes"></div>
+						<div class="bulle"></div>
+						<span class="elt_jeu elt_premier"></span>
+						<span class="elt_jeu elt_dernier"></span>
+						<span class="elt_jeu elt_main"></span>
+						<span class="elt_jeu elt_maitre"></span>
+						<span class="elt_jeu elt_passe"></span>
+					</div>
+					<div id="jou_gauche" class="jou_autre">
+						<div class="auto_nom"></div>
+						<div class="auto_pts"></div>
+						<div class="cartes"></div>
+						<div class="bulle"></div>
+						<span class="elt_jeu elt_premier"></span>
+						<span class="elt_jeu elt_dernier"></span>
+						<span class="elt_jeu elt_main"></span>
+						<span class="elt_jeu elt_maitre"></span>
+						<span class="elt_jeu elt_passe"></span>
+					</div>
+					<div id="jou_droite" class="jou_autre">
+						<div class="auto_nom"></div>
+						<div class="auto_pts"></div>
+						<div class="cartes"></div>
+						<div class="bulle"></div>
+						<span class="elt_jeu elt_premier"></span>
+						<span class="elt_jeu elt_dernier"></span>
+						<span class="elt_jeu elt_main"></span>
+						<span class="elt_jeu elt_maitre"></span>
+						<span class="elt_jeu elt_passe"></span>
+					</div>
+				</div>
+				<div id="ma_main">
+					<div class="auto_nom"></div>
+					<div class="auto_pts"></div>
+					<div class="cartes"></div>
+					<div id="chrono"></div>
+					<div id="actions">
+						<button id="jsi_passer" class="btn_petit btn_annuler"><span class="lng-auto" data-html="passer">Passer</span></button>
+						<button id="jsi_jouer" class="btn_petit"><span class="lng-auto" data-html="jouer">Jouer</span></button>
+					</div>
+					<span class="elt_jeu elt_premier"></span>
+					<span class="elt_jeu elt_dernier"></span>
+					<span class="elt_jeu elt_main"></span>
+					<span class="elt_jeu elt_maitre"></span>
+					<span class="elt_jeu elt_passe"></span>
+				</div>
+			</div>
+			<div id="jeu_annonce"></div>
+			<div id="bloc_enchere"></div>
+		</div>
+
+
+
+
+
+		<div id="ecran_fin" class="ecran" style="display: none;">
+			<div class="ecran_titre"><span class="lng-auto" data-html="score_final">TRADUCTION</span></div>
+			<div class="ecran_fin_flex">
+				<div>
+					<div><span class="joueur auto_j0">Micheline</span><span class="score auto_s0">103</span></div>
+				</div>
+				<div>
+					<div><span class="joueur auto_j1">Rosalie</span><span class="score auto_s1">5</span></div>
+				</div>
+				<div>
+					<div><span class="joueur auto_j2">Raymonde</span><span class="score auto_s2">18</span></div>
+				</div>
+				<div>
+					<div><span class="joueur auto_j3">Germaine</span><span class="score auto_s3">83</span></div>
+				</div>
+				<div>
+					<button id="jsi_fin_partie" data-salon="">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<script type="text/javascript" src="js/local-socket.io.js"></script>
+	<script type="text/javascript" src="js/lng.js"></script>
+	<script type="text/javascript" src="js/lng.js"></script>
+	<script type="text/javascript" src="js/beloinche.js"></script>
+	<script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    titre: 'Tuto Vue.js',
+                    ville: '',
+                    villes: ['Aguascalientes', 'Altrippe', 'Bonifacio', 'Séville'],
+                    equipes: [
+                        { id: 0, nom: 'A.J.Auxerre' },
+                        { id: 1, nom: 'Betis Séville' }
+                    ],
+                    affichage: true
+                }
+            },
+            methods: {
+                inverser() {
+                    this.villes.reverse();
+                },
+                ajouterVille() {
+                    this.villes.push(this.ville);
+                    this.ville = '';
+                },
+                ajouterVilleComp(ville) {
+                    this.villes.push(ville);
+                },
+                toogleAffichage() {
+                    this.affichage = !this.affichage;
+                }
+            }
+        });
+
+        vm.mount('#app_vue');
+    </script>
+</body>
+</html>

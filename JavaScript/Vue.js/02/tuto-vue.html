@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Tuto Vue.js</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1 v-bind:class="titre">{{ titre }}</h1>
+
+        <h2>Exemple 1 : Gestion de tableaux</h2>
+        <ul>
+            <li v-for="ville in villes">{{ ville }}</li>
+        </ul>
+        <button @click="inverser">Inverser la liste</button><br />
+        <h4>Ajouter une ville :</h4>
+        <input type="text" v-model="ville" /> <button @click="ajouterVille" v-if="ville != ''">Ajouter</button>
+
+        <h2>Exemple 2 : Gestion d'objets</h2>
+        <ul>
+            <li v-for="equipe in equipes" :key="equipe.id">{{ equipe.nom }}</li>
+        </ul>
+
+        <h2>Exemple 3 : Modification du titre en temps réel</h2>
+        <input type="text" v-model="titre" />
+        
+        <h2>Exemple 4 : Affichage conditionnel</h2>
+        <p v-if="affichage">J'affiche si ma condition est vraie !</p>
+        <button @click="toogleAffichage">Modifier l'affichage</button>
+
+        <h2>Exemple 5 : Les composants</h2>
+        <paragraphe contenu="Ceci est un test !"></paragraphe>
+        <paragraphe v-for="ville in villes" v-bind:contenu="ville"></paragraphe>
+
+        <h2>Exemple 6 : Un composant contenant un formulaire</h2>
+        <ajout @enregistreVille="ajouterVilleComp"></ajout>
+    </div>
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    titre: 'Tuto Vue.js',
+                    ville: '',
+                    villes: ['Aguascalientes', 'Altrippe', 'Bonifacio', 'Séville'],
+                    equipes: [
+                        { id: 0, nom: 'A.J.Auxerre' },
+                        { id: 1, nom: 'Betis Séville' }
+                    ],
+                    affichage: true
+                }
+            },
+            methods: {
+                inverser() {
+                    this.villes.reverse();
+                },
+                ajouterVille() {
+                    this.villes.push(this.ville);
+                    this.ville = '';
+                },
+                ajouterVilleComp(ville) {
+                    this.villes.push(ville);
+                },
+                toogleAffichage() {
+                    this.affichage = !this.affichage;
+                }
+            }
+        });
+
+        vm.component('paragraphe', {
+            props: ['contenu'],
+            template: `<p>{{ contenu }}</p>`
+        });
+
+        vm.component('ajout', {
+            props: [],
+            emits: ['enregistreVille'],
+            data() {
+                return {
+                    villecomp: 'Test'
+                }
+            },
+            methods: {
+                enregistrement() {
+                    this.$emit('enregistreVille', this.villecomp);
+                    this.villecomp = '';
+                }
+            },
+            template: `<input type="text" v-model="villecomp" /> <button @click="enregistrement" v-if=" villecomp != '' ">Ajouter via Composant</button>`
+        });
+
+        vm.mount('#app');
+    </script>
+</body>
+</html>

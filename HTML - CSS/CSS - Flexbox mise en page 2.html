@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CSS - Flexbox mise en page 2</title>
+	<style>
+		/* Layout */
+		#scroll_1 { display:none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: olivedrab; }
+		#scroll_2 { display:none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: blue; }
+		
+		#ecran {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+		.menu { line-height: 50px; background: hotpink; text-align: center; }
+		.ligne_centre {
+			flex: 1 1 auto; /* occupe la hauteur restante */
+			display: flex; /* crée un contexte flex pour ses enfants */
+			flex-direction: row; /* affichage horizontal */
+		}
+		.class_v {
+			width: 25%;
+		}
+		.col_centre {
+			flex: 1; /* occupe la largeur restante */
+		}
+
+		/* Decoration */
+		body {
+			margin: 0;
+			background: #fff;
+			font-family: "Century Gothic", helvetica, arial, sans-serif;
+			font-size: 1.1em;
+		}
+		.class_h, .class_v, .col_centre {
+			padding: 10px;
+			margin: 0;
+			border: 2px solid #fff;
+			border-radius: 10px;
+			color: #fff;
+		}
+		.class_h {
+			background: dodgerblue;
+			text-align: center;
+		}
+		.class_v {
+			background: orange;
+		}
+		.col_centre {
+			background: olivedrab;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script>
+		jQuery(document).ready(function($) {
+			$(".jsc_toggle").on("click", function() { // <div class="jsc_toggle" data-eltid="id_html" data-effet="slide"></div>
+				if ($(this).is('[data-eltid]')) {
+					switch ($(this).attr('data-effet')) {
+						case 'slide':
+							$('#' + $(this).attr('data-eltid')).slideToggle();
+							break;
+						case 'fade':
+							$('#' + $(this).attr('data-eltid')).fadeToggle();
+							break;
+						default:
+							$('#' + $(this).attr('data-eltid')).toggle();
+					}
+				}
+			});
+			$(".jsc_ouvrir").on("click", function() { // <div class="jsc_ouvrir" data-eltid="id_html" data-effet="slide"></div>
+				if ($(this).is('[data-eltid]')) {
+					switch ($(this).attr('data-effet')) {
+						case 'slide':
+							$('#' + $(this).attr('data-eltid')).slideDown();
+							break;
+						case 'fade':
+							$('#' + $(this).attr('data-eltid')).fadeIn();
+							break;
+						default:
+							$('#' + $(this).attr('data-eltid')).show();
+					}
+				}
+			});
+			$(".jsc_fermer").on("click", function() { // <div class="jsc_fermer" data-eltid="id_html" data-effet="slide"></div>
+				if ($(this).is('[data-eltid]')) {
+					switch ($(this).attr('data-effet')) {
+						case 'slide':
+							$('#' + $(this).attr('data-eltid')).slideUp();
+							break;
+						case 'fade':
+							$('#' + $(this).attr('data-eltid')).fadeOut();
+							break;
+						default:
+							$('#' + $(this).attr('data-eltid')).hide();
+					}
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="scroll_1">
+		<div class="jsc_fermer" data-eltid="scroll_1" data-effet="slide">
+			Fermer
+		</div>
+		Lalalala
+	</div>
+	<div id="scroll_2">
+		<div class="jsc_fermer" data-eltid="scroll_2" data-effet="slide">
+			Fermer
+		</div>
+		Lalalala
+	</div>
+	<div id="ecran">
+		<div class="menu">
+			<button class="jsc_toggle" data-eltid="scroll_1" data-effet="slide">Menu 1</button>
+			<button class="jsc_toggle" data-eltid="scroll_2" data-effet="slide">Menu 2</button>
+		</div>
+		<div class="class_h class_1">
+			Test 1
+		</div>
+		<div class="ligne_centre">
+			<div class="class_v class_2">
+				Test 2
+			</div>
+			<div class="col_centre">
+				Content
+			</div>
+			<div class="class_v class_3">
+				Test 3
+			</div>
+		</div>
+		<div class="class_h class_4">Test 4</div>
+	</div>
+</body>
+</html>

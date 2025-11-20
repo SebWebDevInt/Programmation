@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CSS - Flexbox mise en page</title>
+	<style>
+		/* Layout */
+		body {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+		.wrapper {
+			flex: 1 1 auto; /* occupe la hauteur restante */
+			display: flex; /* crée un contexte flex pour ses enfants */
+			flex-direction: row; /* affichage horizontal */
+		}
+		nav {
+			width: 15em;
+		}
+		.content {
+			flex: 1; /* occupe la largeur restante */
+		}
+
+		/* Responsive */
+		@media (max-width: 640px) {
+			body {
+				min-height: 0; 
+			}
+			.wrapper {
+				flex-direction: column;
+			}
+			.content {
+				flex-basis: auto;
+			}
+			nav {
+				width: auto;
+				order: 1;
+			}
+		}
+
+		/* Decoration */
+		body {
+			margin: 0;
+			background: #fff;
+			font-family: "Century Gothic", helvetica, arial, sans-serif;
+			font-size: 1.1em;
+		}
+		header, nav, section, footer {
+			padding: 10px;
+			margin: 0;
+			border: 2px solid #fff;
+			border-radius: 10px;
+			color: #fff;
+		}
+		header {
+			background: dodgerblue;
+			text-align: center;
+		}
+		nav {
+			background: orange;
+		}
+		nav a {
+			display: block;
+			padding: .5em 1em;
+			color: #fff;
+			text-decoration: none;
+			border-bottom: 1px solid rgba(255,255,255,.3);
+		}
+		section {
+			background: hotpink;
+		}
+		footer {
+			background: olivedrab;
+			text-align: center;
+		}
+		
+		/* Colonnage */
+		.flex-row {
+		  display: flex;
+		  flex-direction: row;
+		  justify-content: space-between;
+		  flex-wrap: wrap;
+		}
+		.flex-row.flex-row-1col > * {
+		  flex-basis: 100%;
+		  flex-grow: 1;
+		  margin: 0.5em 0;
+		}
+		.flex-row.flex-row-2col {
+		  justify-content: space-between;
+		}
+		.flex-row.flex-row-2col > * {
+		  flex-basis: 40%;
+		  flex-grow: 1;
+		  margin: 0.5em 0.5%;
+		}
+		@media (max-width: 543px) {
+		  .flex-row.flex-row-2col > * {
+			flex-basis: 100% !important;
+		  }
+		}
+		@media (max-width: 767px) {
+		  .flex-row.flex-row-2col > * {
+			flex-basis: 100% !important;
+		  }
+		}
+		.flex-row.flex-row-3col {
+		  justify-content: space-between;
+		}
+		.flex-row.flex-row-3col > * {
+		  flex-basis: 25%;
+		  flex-grow: 1;
+		  margin: 0.5em 0.5%;
+		}
+		@media (max-width: 543px) {
+		  .flex-row.flex-row-3col > * {
+			flex-basis: 100% !important;
+		  }
+		}
+		@media (max-width: 767px) {
+		  .flex-row.flex-row-3col > * {
+			flex-basis: 100% !important;
+		  }
+		}
+		.flex-row.flex-row-start {
+		  justify-content: flex-start;
+		}
+		.flex-row.flex-row-spacearound {
+		  justify-content: space-around;
+		}
+
+		.flex-row-center {
+		  display: flex;
+		  flex-direction: row;
+		  justify-content: center;
+		  flex-wrap: wrap;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>I do love my Knacky balls !</h1>
+	</header>
+	<div class="wrapper">
+		<nav id="navigation" role="navigation">
+			<a href="#">Salade</a>
+			<a href="#">Tomate</a>
+			<a href="#">Oignon</a>
+			<a href="#">Choucroute</a>
+			<a href="#">Picon bière</a>
+		</nav>
+		<section class="content">
+			<h2>Flexbox c'est la vie, Hopla !</h2>
+			<p><code>flex: 1;</code></p>
+			<p>Lorem Elsass ipsum lacus leverwurscht Wurschtsalad mamsell Gal. gewurztraminer turpis, suspendisse commodo Oberschaeffolsheim ornare aliquam semper Miss Dahlias Mauris turpis sagittis kuglopf eleifend dignissim baeckeoffe geht's Richard Schirmeck mollis habitant schnaps ante et sit leo schpeck sit Salu bissame Salut bisamme varius quam. amet elementum nullam bissame bredele Heineken picon bière gal sed risus, condimentum Verdammi ch'ai ac réchime météor barapli s'guelt quam, non Christkindelsmärik blottkopf, Carola tellus rucksack vielmols, Gal !</p>
+			<div class="flex-row">
+				<div style="background-color: #ffffff;">Bloc 1</div>
+				<div style="background-color: #dddddd;">Bloc 2</div>
+				<div style="background-color: #bbbbbb;">Bloc 3</div>
+			</div>
+			<div class="flex-row flex-row-1col">
+				<div style="background-color: #ffffff;">Bloc 1</div>
+			</div>
+			<div class="flex-row flex-row-2col">
+				<div style="background-color: #ffffff;">Bloc 1</div>
+				<div style="background-color: #bbbbbb;">Bloc 2</div>
+			</div>
+			<div class="flex-row flex-row-3col">
+				<div style="background-color: #ffffff;">Bloc 1</div>
+				<div style="background-color: #dddddd;">Bloc 2</div>
+				<div style="background-color: #bbbbbb;">Bloc 3</div>
+			</div>
+		</section>
+	</div>
+	<footer>Hopla le pied de pache !</footer>
+</body>
+</html>

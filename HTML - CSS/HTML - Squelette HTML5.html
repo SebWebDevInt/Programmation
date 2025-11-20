@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTML - Squelette HTML5</title>
+	<meta name="description" content="Description de la page" />
+	<meta name="robots" content="index, follow" />
+
+	<link rel="stylesheet" type="text/css" href="/css/style.css" media="all" />
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+	<script>
+		jQuery(document).ready(function($){
+			$("#btn_test").on("click", function() {
+				$.ajax({
+					url: 'http://jsonplaceholder.typicode.com/posts/1',
+					method: 'GET',
+					dataType : "json",
+					data: {
+						var1: 'une_variable',
+						var2: 'une_autre_variable'
+					}
+				})
+				.done(function(json) {
+					$('#resultat').html("Ajax OK ! Résultat = " + json.title);
+				})
+				.fail(function() {
+					$('#resultat').html("Ajax ERREUR :-(");
+				})
+				.always(function() {
+					$('#resultat').append("<br />Ajax TERMINE.");
+				});
+			});
+		});
+	</script>
+	<noscript>ATTENTION ! JavaScript n’est pas supporté !</noscript>
+</head>
+<body>
+	<p>
+		Contenu de la page
+	</p>
+	<button id="btn_test">Test AJAX</button>
+	<p id="resultat"></p>
+</body>
+</html>

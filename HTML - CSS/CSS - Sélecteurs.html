@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS - Les sélecteurs</title>
+		<style>
+			ul#am_sud li { color: blue; }
+			ul#am_sud #bolivie { color: green; }
+			ul#am_sud .pauvre { font-weight: bold; }
+			ul#am_sud .pauvre + li { font-style: italic; }
+			ul#am_sud #bolivie ~ li { text-decoration: underline; }
+			
+			ul#am_sud_capitales li[data-capitale] { color: purple; }
+			ul#am_sud_capitales li[data-capitale="Bogota"] { font-weight: bold; } /* data-capitale égal à Bogota */
+			ul#am_sud_capitales li[data-capitale*="Pa"] { text-decoration: underline; } /* data-capitale contient Pa */
+			ul#am_sud_capitales li[data-capitale^="L"] { font-style: italic; } /* data-capitale commence par L */
+			ul#am_sud_capitales li[data-capitale$="cas"] { color: red; } /* data-capitale termine par cas */
+			ul#am_sud_capitales li[data-capitale~="La"] { color: green; } /* data-capitale contient La en valeur séparé par un espace */
+			
+			ol li:not(#bolivie) { color: blue; }
+			ol li:first-child { text-decoration: underline; }
+			ol li:last-child { font-weight: bold; }
+			ol li:nth-child(3) { font-style: italic; }
+			ol li:nth-last-child(2) { text-decoration: line-through; }
+			
+			div > p { color: blue; }
+			aside + p { font-weight: bold; }
+			p::first-line { font-style: italic; }
+			p::first-letter { color: green; }
+			p:first-of-type { text-decoration: underline; }
+			p:last-of-type { padding-left: 15px; }
+			p:nth-of-type(2) { text-decoration: overline; }
+			p:only-of-type { color: purple !important; }
+			aside p:only-child { font-size: 1.5em; }
+			
+			input[type=checkbox] { margin: 0 8px; }
+			input[type=checkbox]:checked { margin: 0 15px; }
+		</style>
+	</head>
+	<body>
+		<ul id="am_sud">
+			<li>Argentine</li>
+			<li id="bolivie" class="pauvre">Bolivie</li>
+			<li>Colombie</li>
+			<li class="pauvre">Pérou</li>
+			<li>Uruguay</li>
+			<li>Vénézuela</li>
+		</ul>
+		<ul id="am_sud_capitales">
+			<li data-capitale="Buenos Aires">Argentine</li>
+			<li data-capitale="La Paz">Bolivie</li>
+			<li data-capitale="Bogota">Colombie</li>
+			<li data-capitale="Lima">Pérou</li>
+			<li>Uruguay</li>
+			<li data-capitale="Caracas">Vénézuela</li>
+		</ul>
+		<ol>
+			<li>Argentine</li>
+			<li id="bolivie" class="pauvre">Bolivie</li>
+			<li>Colombie</li>
+			<li class="pauvre">Pérou</li>
+			<li>Uruguay</li>
+			<li>Vénézuela</li>
+		</ol>
+		<div>
+			<p>Paragraphe situé dans une balise div</p>
+			<aside>
+				<p>Paragraphe situé dans une balise aside elle même situé dans une balise div</p>
+			</aside>
+			<p>Paragraphe situé directement après aside dans une balise div</p>
+		</div>
+		<form>
+			<label><input type="checkbox" value="cornichon" name="preference" /> Cornichon</label>
+			<label><input type="checkbox" value="salade" name="preference" /> Salade</label>
+			<label><input type="checkbox" value="tomate" name="preference" /> Tomate</label>
+		</form>
+	</body>
+</html>
