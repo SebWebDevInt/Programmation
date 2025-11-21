@@ -12,7 +12,7 @@ print("""
 	|    |
 	------""")
 
-# Quleques opérateurs
+# Quelques opérateurs
 nb = 20
 nb2 = 3
 print('{} divisé par {} ='.format(nb, nb2), nb // nb2, 'reste', nb % nb2, 'OU', nb / nb2)
